@@ -14,7 +14,6 @@ import 'package:immich_mobile/widgets/settings/backup_settings/backup_settings.d
 import 'package:immich_mobile/widgets/settings/beta_sync_settings/sync_status_and_actions.dart';
 import 'package:immich_mobile/widgets/settings/free_up_space_settings.dart';
 import 'package:immich_mobile/widgets/settings/language_settings.dart';
-import 'package:immich_mobile/widgets/settings/networking_settings/networking_settings.dart';
 import 'package:immich_mobile/widgets/settings/notification_setting.dart';
 import 'package:immich_mobile/widgets/settings/passkey_settings.dart';
 import 'package:immich_mobile/widgets/settings/preference_settings/preference_setting.dart';
@@ -26,7 +25,6 @@ enum SettingSection {
   backup(Icons.cloud_upload_outlined),
   freeUpSpace(Icons.cleaning_services_outlined),
   languages(Icons.language),
-  networking(Icons.wifi),
   notifications(Icons.notifications_none_rounded),
   passkeys(Icons.key_outlined),
   preferences(Icons.interests_outlined),
@@ -41,7 +39,6 @@ enum SettingSection {
     SettingSection.backup => t.backup,
     SettingSection.freeUpSpace => t.free_up_space,
     SettingSection.languages => t.language,
-    SettingSection.networking => t.networking_settings,
     SettingSection.notifications => t.notifications,
     SettingSection.passkeys => t.passkeys(count: 2),
     SettingSection.preferences => t.preferences_settings_title,
@@ -55,7 +52,6 @@ enum SettingSection {
     SettingSection.backup => t.backup_settings_subtitle,
     SettingSection.freeUpSpace => t.free_up_space_settings_subtitle,
     SettingSection.languages => t.setting_languages_subtitle,
-    SettingSection.networking => t.networking_subtitle,
     SettingSection.notifications => t.setting_notifications_subtitle,
     SettingSection.passkeys => t.manage_your_passkeys,
     SettingSection.preferences => t.preferences_settings_subtitle,
@@ -69,7 +65,6 @@ enum SettingSection {
     SettingSection.backup => const BackupSettings(),
     SettingSection.freeUpSpace => const FreeUpSpaceSettings(),
     SettingSection.languages => const LanguageSettings(),
-    SettingSection.networking => const NetworkingSettings(),
     SettingSection.notifications => const NotificationSetting(),
     SettingSection.passkeys => const PasskeySettings(),
     SettingSection.preferences => const PreferenceSetting(),

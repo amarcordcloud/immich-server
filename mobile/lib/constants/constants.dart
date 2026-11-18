@@ -2,6 +2,10 @@ import 'dart:io';
 
 const String kMobileMetadataKey = "mobile-app";
 
+// Hardcoded server URL used by the login flow (the server selection step is removed).
+// Can be overridden at build time with: --dart-define=SERVER_URL=https://your.server
+const String kServerUrl = String.fromEnvironment('SERVER_URL', defaultValue: 'https://photos.example.com');
+
 // Number of log entries to retain on app start
 const int kLogTruncateLimit = 2000;
 

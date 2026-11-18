@@ -181,16 +181,7 @@ class ApiService {
     if (serverEndpoint != null && serverEndpoint.isNotEmpty) {
       urls.add(serverEndpoint);
     }
-    final network = SettingsRepository.instance.appConfig.network;
-    final localEndpoint = network.localEndpoint;
-    if (localEndpoint != null && localEndpoint.isNotEmpty) {
-      urls.add(localEndpoint);
-    }
-    for (final url in network.externalEndpointList) {
-      if (url.isNotEmpty) {
-        urls.add(url);
-      }
-    }
+    // Local/external alternate endpoints are not used: the server URL is hardcoded globally.
     return urls;
   }
 
