@@ -21,6 +21,22 @@ describe(UserAdminService.name, () => {
     );
   });
 
+  describe('search', () => {
+    it('should filter users by email', async () => {
+      mocks.user.getList.mockResolvedValue([userStub.user1]);
+
+      await expect(sut.search(authStub.admin, { email: userStub.user1.email })).resolves.toEqual([
+        mapUserAdmin(userStub.user1),
+      ]);
+
+      expect(mocks.user.getList).toHaveBeenCalledWith({
+        id: undefined,
+        email: userStub.user1.email,
+        withDeleted: undefined,
+      });
+    });
+  });
+
   describe('create', () => {
     it('should not create a user if there is no local admin account', async () => {
       mocks.user.getAdmin.mockResolvedValueOnce(void 0);

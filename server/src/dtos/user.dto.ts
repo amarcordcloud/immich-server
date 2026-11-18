@@ -70,6 +70,7 @@ const UserAdminSearchSchema = z
   .object({
     withDeleted: stringToBool.optional().describe('Include deleted users'),
     id: z.uuidv4().optional().describe('User ID filter'),
+    email: toEmail.optional().describe('User email filter (exact match)'),
   })
   .meta({ id: 'UserAdminSearchDto' });
 

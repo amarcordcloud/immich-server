@@ -4284,7 +4284,8 @@ export function sendTestEmailAdmin({ adminConfigSmtpDto }: {
 /**
  * Search users
  */
-export function searchUsersAdmin({ id, withDeleted }: {
+export function searchUsersAdmin({ email, id, withDeleted }: {
+    email?: string;
     id?: string;
     withDeleted?: boolean;
 }, opts?: Oazapfts.RequestOpts) {
@@ -4292,6 +4293,7 @@ export function searchUsersAdmin({ id, withDeleted }: {
         status: 200;
         data: UserAdminResponseDto[];
     }>(`/admin/users${QS.query(QS.explode({
+        email,
         id,
         withDeleted
     }))}`, {

@@ -13,6 +13,7 @@ import { asUuid } from 'src/utils/database.js';
 
 export interface UserListFilter {
   id?: string;
+  email?: string;
   withDeleted?: boolean;
 }
 
@@ -160,13 +161,14 @@ export class UserRepository {
     { name: 'with deleted', params: [{ withDeleted: true }] },
     { name: 'without deleted', params: [{ withDeleted: false }] },
   )
-  getList({ id, withDeleted }: UserListFilter = {}) {
+  getList({ id, email, withDeleted }: UserListFilter = {}) {
     return this.db
       .selectFrom('user')
       .select(columns.userAdmin)
       .select(withMetadata)
       .$if(!withDeleted, (eb) => eb.where('user.deletedAt', 'is', null))
       .$if(!!id, (eb) => eb.where('user.id', '=', id!))
+      .$if(!!email, (eb) => eb.where('user.email', '=', email!))
       .orderBy('createdAt', 'desc')
       .execute();
   }
