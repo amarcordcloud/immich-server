@@ -12,6 +12,7 @@ import {
   ServerPingResponse,
   ServerStatsResponseDto,
   ServerStorageResponseDto,
+  ServerUserStatsQueryDto,
   UsageByUserDto,
 } from 'src/dtos/server.dto.js';
 import { StorageFolder, SystemMetadataKey } from 'src/enum.js';
@@ -154,15 +155,7 @@ export class ServerService extends BaseService {
     serverStats.usageByUser ??= [];
 
     for (const user of userStats) {
-      const usage = new UsageByUserDto();
-      usage.userId = user.userId;
-      usage.userName = user.userName;
-      usage.photos = user.photos;
-      usage.videos = user.videos;
-      usage.usage = user.usage;
-      usage.usagePhotos = user.usagePhotos;
-      usage.usageVideos = user.usageVideos;
-      usage.quotaSizeInBytes = user.quotaSizeInBytes;
+      const usage = this.mapUsageByUser(user);
 
       serverStats.photos += usage.photos;
       serverStats.videos += usage.videos;
@@ -174,6 +167,28 @@ export class ServerService extends BaseService {
     }
 
     return serverStats;
+  }
+
+  async getUserStatistics({ userId }: ServerUserStatsQueryDto): Promise<UsageByUserDto> {
+    const [userStats] = await this.userRepository.getUserStats(userId);
+    if (!userStats) {
+      throw new BadRequestException('User not found');
+    }
+
+    return this.mapUsageByUser(userStats);
+  }
+
+  private mapUsageByUser(user: UserStatsQueryResponse): UsageByUserDto {
+    const usage = new UsageByUserDto();
+    usage.userId = user.userId;
+    usage.userName = user.userName;
+    usage.photos = user.photos;
+    usage.videos = user.videos;
+    usage.usage = user.usage;
+    usage.usagePhotos = user.usagePhotos;
+    usage.usageVideos = user.usageVideos;
+    usage.quotaSizeInBytes = user.quotaSizeInBytes;
+    return usage;
   }
 
   getSupportedMediaTypes(): ServerMediaTypesResponseDto {

@@ -1,3 +1,4 @@
+import { BadRequestException } from '@nestjs/common';
 import { SystemMetadataKey } from 'src/enum.js';
 import { ServerService } from 'src/services/server.service.js';
 import { mockEnvData } from 'test/repositories/config.repository.mock.js';
@@ -266,6 +267,33 @@ describe(ServerService.name, () => {
       });
 
       expect(mocks.user.getUserStats).toHaveBeenCalled();
+    });
+  });
+
+  describe('getUserStatistics', () => {
+    it('should return the usage of the requested user', async () => {
+      const userId = 'user1';
+      const usage = {
+        userId,
+        userName: '1 User',
+        photos: 10,
+        videos: 11,
+        usage: 12_345,
+        usagePhotos: 1,
+        usageVideos: 11_345,
+        quotaSizeInBytes: null,
+      };
+      mocks.user.getUserStats.mockResolvedValue([usage]);
+
+      await expect(sut.getUserStatistics({ userId })).resolves.toEqual(usage);
+
+      expect(mocks.user.getUserStats).toHaveBeenCalledWith(userId);
+    });
+
+    it('should throw if the user does not exist', async () => {
+      mocks.user.getUserStats.mockResolvedValue([]);
+
+      await expect(sut.getUserStatistics({ userId: 'missing' })).rejects.toBeInstanceOf(BadRequestException);
     });
   });
 

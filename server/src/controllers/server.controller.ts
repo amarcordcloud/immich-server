@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Put } from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Put, Query } from '@nestjs/common';
 import { ApiNotFoundResponse, ApiTags } from '@nestjs/swagger';
 import { Endpoint, HistoryBuilder } from 'src/decorators.js';
 import { LicenseKeyDto, LicenseResponseDto } from 'src/dtos/license.dto.js';
@@ -11,8 +11,10 @@ import {
   ServerPingResponse,
   ServerStatsResponseDto,
   ServerStorageResponseDto,
+  ServerUserStatsQueryDto,
   ServerVersionHistoryResponseDto,
   ServerVersionResponseDto,
+  UsageByUserDto,
 } from 'src/dtos/server.dto.js';
 import { VersionCheckStateResponseDto } from 'src/dtos/system-metadata.dto.js';
 import { ApiTag, Permission } from 'src/enum.js';
@@ -135,6 +137,17 @@ export class ServerController {
   })
   getServerStatistics(): Promise<ServerStatsResponseDto> {
     return this.service.getStatistics();
+  }
+
+  @Get('statistics/user')
+  @Authenticated({ permission: Permission.ServerStatistics, admin: true })
+  @Endpoint({
+    summary: 'Get user statistics',
+    description: 'Retrieve asset counts and storage usage for a single user.',
+    history: new HistoryBuilder().added('v3.5.0'),
+  })
+  getServerUserStatistics(@Query() dto: ServerUserStatsQueryDto): Promise<UsageByUserDto> {
+    return this.service.getUserStatistics(dto);
   }
 
   @Get('media-types')

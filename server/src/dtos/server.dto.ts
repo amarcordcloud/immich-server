@@ -98,6 +98,12 @@ const UsageByUserSchema = z
   })
   .meta({ id: 'UsageByUserDto' });
 
+const ServerUserStatsQuerySchema = z
+  .object({
+    userId: z.uuidv4().describe('User ID'),
+  })
+  .meta({ id: 'ServerUserStatsQueryDto' });
+
 const ServerStatsResponseSchema = z
   .object({
     photos: z.int().describe('Total number of photos'),
@@ -198,6 +204,7 @@ export class ServerVersionResponseDto extends createZodDto(ServerVersionResponse
 
 export class ServerVersionHistoryResponseDto extends createZodDto(ServerVersionHistoryResponseSchema) {}
 export class UsageByUserDto extends createZodDto(UsageByUserSchema) {}
+export class ServerUserStatsQueryDto extends createZodDto(ServerUserStatsQuerySchema) {}
 export class ServerStatsResponseDto extends createZodDto(ServerStatsResponseSchema) {}
 export class ServerMediaTypesResponseDto extends createZodDto(ServerMediaTypesResponseSchema) {}
 export class ServerConfigDto extends createZodDto(ServerConfigSchema) {}

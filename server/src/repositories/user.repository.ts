@@ -230,10 +230,11 @@ export class UserRepository {
       : this.db.updateTable('user').set({ deletedAt: new Date() }).where('id', '=', user.id).execute();
   }
 
-  @GenerateSql()
-  getUserStats() {
+  @GenerateSql({ params: [] }, { name: 'with user id', params: [DummyValue.UUID] })
+  getUserStats(userId?: string) {
     return this.db
       .selectFrom('user')
+      .$if(!!userId, (qb) => qb.where('user.id', '=', userId!))
       .leftJoin('asset', (join) => join.onRef('asset.ownerId', '=', 'user.id').on('asset.deletedAt', 'is', null))
       .leftJoin('asset_exif', 'asset_exif.assetId', 'asset.id')
       .select(['user.id as userId', 'user.name as userName', 'user.quotaSizeInBytes'])
