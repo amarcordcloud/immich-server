@@ -4,6 +4,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart' hide Store;
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:immich_mobile/constants/constants.dart';
 import 'package:immich_mobile/extensions/build_context_extensions.dart';
 import 'package:immich_mobile/generated/translations.g.dart';
 import 'package:immich_mobile/models/server_info/server_disk_info.model.dart';
@@ -90,6 +91,13 @@ class ImmichAppBarDialog extends HookConsumerWidget {
         context.t.settings,
         () => context.pushRoute(const SettingsRoute()),
       );
+    }
+
+    ListTile buildAdministrationButton() {
+      return buildActionButton(Icons.admin_panel_settings_outlined, context.t.administration, () {
+        ContextHelper(context).pop();
+        unawaited(launchUrl(Uri.parse(kAccountUrl), mode: LaunchMode.externalApplication));
+      });
     }
 
     ListTile buildFreeUpSpaceButton() {
@@ -290,6 +298,7 @@ class ImmichAppBarDialog extends HookConsumerWidget {
                 buildAppLogButton(),
                 buildFreeUpSpaceButton(),
                 buildSettingButton(),
+                buildAdministrationButton(),
                 buildSignOutButton(),
                 buildFooter(),
               ],

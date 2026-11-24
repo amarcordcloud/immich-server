@@ -1255,6 +1255,7 @@
   "image_alt_text_date_place_2_people": "{isVideo, select, true {Video} other {Image}} taken in {city}, {country} with {person1} and {person2} on {date}",
   "image_alt_text_date_place_3_people": "{isVideo, select, true {Video} other {Image}} taken in {city}, {country} with {person1}, {person2}, and {person3} on {date}",
   "image_alt_text_date_place_4_or_more_people": "{isVideo, select, true {Video} other {Image}} taken in {city}, {country} with {person1}, {person2}, and {additionalCount, number} others on {date}",
+  "immich_admin": "Immich Admin",
   "immich_logo": "Amarcord Logo",
   "import_from_json": "Import from JSON",
   "import_path": "Import path",

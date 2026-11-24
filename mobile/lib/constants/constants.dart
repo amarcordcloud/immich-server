@@ -6,6 +6,10 @@ const String kMobileMetadataKey = "mobile-app";
 // Can be overridden at build time with: --dart-define=SERVER_URL=https://your.server
 const String kServerUrl = String.fromEnvironment('SERVER_URL', defaultValue: 'https://photos.example.com');
 
+// Account/administration portal URL opened in the external browser.
+// Can be overridden at build time with: --dart-define=ACCOUNT_URL=https://account.example.com
+const String kAccountUrl = String.fromEnvironment('ACCOUNT_URL', defaultValue: 'https://account.amarcord.cloud');
+
 // Number of log entries to retain on app start
 const int kLogTruncateLimit = 2000;
 

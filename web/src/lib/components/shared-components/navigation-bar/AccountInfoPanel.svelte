@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { PUBLIC_ACCOUNT_URL } from '$app/env/public';
   import { focusTrap } from '#lib/actions/focus-trap.ts';
   import { authManager } from '#lib/managers/auth-manager.svelte.ts';
   import AvatarEditModal from '#lib/modals/AvatarEditModal.svelte';
@@ -6,7 +7,7 @@
   import { getAboutInfoQuery } from '#lib/queries/server-info.query.ts';
   import { Route } from '#lib/route.ts';
   import { Button, Icon, IconButton, modalManager } from '@immich/ui';
-  import { mdiCog, mdiLogout, mdiPencil, mdiWrench } from '@mdi/js';
+  import { mdiCog, mdiLogout, mdiPencil, mdiShieldAccount, mdiWrench } from '@mdi/js';
   import { createQuery } from '@tanstack/svelte-query';
   import { t } from 'svelte-i18n';
   import { fade } from 'svelte/transition';
@@ -84,10 +85,26 @@
         >
           <div class="flex place-content-center place-items-center gap-2 px-2 text-center">
             <Icon icon={mdiWrench} size="18" aria-hidden />
-            {$t('administration')}
+            {$t('immich_admin')}
           </div>
         </Button>
       {/if}
+      <Button
+        href={PUBLIC_ACCOUNT_URL}
+        target="_blank"
+        rel="noopener noreferrer"
+        onclick={onClose}
+        shape="round"
+        variant="ghost"
+        size="small"
+        color="secondary"
+        class="border hover:bg-immich-primary/10 dark:border-immich-dark-gray dark:bg-gray-500 dark:text-white dark:hover:bg-immich-dark-primary/50"
+      >
+        <div class="flex place-content-center place-items-center gap-2 px-2 text-center">
+          <Icon icon={mdiShieldAccount} size="18" aria-hidden />
+          {$t('administration')}
+        </div>
+      </Button>
     </div>
   </div>
 
