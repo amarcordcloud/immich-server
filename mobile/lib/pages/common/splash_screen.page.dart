@@ -49,7 +49,7 @@ class BootstrapErrorWidget extends StatelessWidget {
       assetLoader: const CodegenLoader(),
       child: Builder(
         builder: (lCtx) => MaterialApp(
-          title: 'Immich',
+          title: 'Amarcord',
           debugShowCheckedModeBanner: true,
           localizationsDelegates: [...lCtx.localizationDelegates, ...fallbackLocalizationDelegates],
           supportedLocales: lCtx.supportedLocales,

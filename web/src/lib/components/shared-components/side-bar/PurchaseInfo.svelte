@@ -8,8 +8,9 @@
   import { handleError } from '#lib/utils/handle-error.ts';
   import { getButtonVisibility } from '#lib/utils/purchase-utils.ts';
   import { updateMyPreferences } from '@immich/sdk';
-  import { Button, Icon, IconButton, Logo, SupporterBadge, modalManager } from '@immich/ui';
+  import { Button, Icon, IconButton, SupporterBadge, modalManager } from '@immich/ui';
   import { mdiClose, mdiInformationOutline } from '@mdi/js';
+  import Logo from '#lib/components/shared-components/Logo.svelte';
   import { t } from 'svelte-i18n';
   import { SvelteDate } from 'svelte/reactivity';
   import { fade } from 'svelte/transition';

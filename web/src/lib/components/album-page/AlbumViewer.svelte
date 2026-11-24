@@ -18,7 +18,8 @@
   import { handlePromiseError } from '#lib/utils.ts';
   import { fileUploadHandler, openFileUploadDialog } from '#lib/utils/file-uploader.ts';
   import type { AlbumResponseDto, SharedLinkResponseDto } from '@immich/sdk';
-  import { ActionButton, IconButton, Logo } from '@immich/ui';
+  import { ActionButton, IconButton } from '@immich/ui';
+  import Logo from '#lib/components/shared-components/Logo.svelte';
   import { mdiDownload, mdiFileImagePlusOutline, mdiPresentationPlay } from '@mdi/js';
   import { t } from 'svelte-i18n';
   import ControlAppBar from '../shared-components/ControlAppBar.svelte';

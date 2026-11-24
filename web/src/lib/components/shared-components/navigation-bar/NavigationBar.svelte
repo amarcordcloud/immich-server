@@ -13,9 +13,10 @@
   import { getGlobalActions } from '#lib/services/app.service.ts';
   import { mediaQueryManager } from '#lib/stores/media-query-manager.svelte.ts';
   import { sidebarStore } from '#lib/stores/sidebar.svelte.ts';
-  import { ActionButton, Button, IconButton, Logo } from '@immich/ui';
+  import { ActionButton, Button, IconButton } from '@immich/ui';
   import { mdiBellBadge, mdiBellOutline, mdiMagnify, mdiMenu, mdiTrayArrowUp } from '@mdi/js';
   import { createQuery } from '@tanstack/svelte-query';
+  import Logo from '#lib/components/shared-components/Logo.svelte';
   import { t } from 'svelte-i18n';
   import { page } from '$app/state';
   import ThemeButton from '../ThemeButton.svelte';
