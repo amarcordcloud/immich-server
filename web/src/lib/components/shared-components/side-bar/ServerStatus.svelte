@@ -1,12 +1,11 @@
 <script lang="ts">
   import { authManager } from '#lib/managers/auth-manager.svelte.ts';
   import { releaseManager } from '#lib/managers/release-manager.svelte.ts';
-  import ServerAboutModal from '#lib/modals/ServerAboutModal.svelte';
-  import { getAboutInfoQuery, getVersionHistoryQuery } from '#lib/queries/server-info.query.ts';
+  import { getAboutInfoQuery } from '#lib/queries/server-info.query.ts';
   import { websocketStore } from '#lib/stores/websocket.ts';
   import { semverToName } from '#lib/utils.ts';
   import { type ReleaseEventV1 } from '@immich/sdk';
-  import { Icon, Text, modalManager } from '@immich/ui';
+  import { Icon, Text } from '@immich/ui';
   import { mdiAlert, mdiNewBox } from '@mdi/js';
   import { createQuery } from '@tanstack/svelte-query';
   import { t } from 'svelte-i18n';
@@ -15,11 +14,9 @@
 
   const queries = {
     about: createQuery(getAboutInfoQuery),
-    history: createQuery(getVersionHistoryQuery),
   };
 
   const info = $derived(queries.about.data);
-  const versions = $derived(queries.history.data ?? []);
   let isMain = $derived(info?.sourceRef === 'main' && info.repository === 'immich-app/immich');
   let version = $derived($serverVersion ? semverToName($serverVersion) : null);
 
@@ -58,17 +55,13 @@
 
   <div class="flex justify-between justify-items-center">
     {#if $connected && version}
-      <button
-        type="button"
-        onclick={() => info && modalManager.show(ServerAboutModal, { versions, info })}
-        class="flex place-content-center place-items-center gap-1 dark:text-immich-gray"
-      >
+      <div class="flex place-content-center place-items-center gap-1 dark:text-immich-gray">
         {#if isMain}
           <Icon icon={mdiAlert} size="1.5em" color="#ffcc4d" /> {info?.sourceRef}
         {:else}
           {version}
         {/if}
-      </button>
+      </div>
     {:else}
       <p class="text-red-500">{$t('unknown')}</p>
     {/if}

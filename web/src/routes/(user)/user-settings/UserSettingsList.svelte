@@ -1,9 +1,8 @@
 <script lang="ts">
   import SettingAccordion from '#lib/components/shared-components/settings/SettingAccordion.svelte';
-  import { OpenQueryParam, QueryParameter } from '#lib/constants.ts';
+  import { OpenQueryParam } from '#lib/constants.ts';
   import { createPreloadedQuery } from '#lib/queries/client.ts';
   import { getUserConfigQuery } from '#lib/queries/config-user.query.ts';
-  import { oauth } from '#lib/utils.ts';
   import {
     mdiAccountGroupOutline,
     mdiAccountOutline,
@@ -13,34 +12,25 @@
     mdiDevices,
     mdiDownload,
     mdiFeatureSearchOutline,
-    mdiFormTextboxPassword,
-    mdiKeyOutline,
     mdiLockSmart,
     mdiServerOutline,
     mdiShieldKeyOutline,
-    mdiTwoFactorAuthentication,
   } from '@mdi/js';
   import { t } from 'svelte-i18n';
-  import { page } from '$app/state';
   import AppSettings from './AppSettings.svelte';
-  import ChangePasswordSettings from './ChangePasswordSettings.svelte';
   import DeviceList from './DeviceList.svelte';
   import DownloadSettings from './DownloadSettings.svelte';
   import FeatureSettings from './FeatureSettings.svelte';
   import NotificationsSettings from './NotificationsSettings.svelte';
-  import OAuthSettings from './OAuthSettings.svelte';
   import ChangePinCodeSettings from './PinCodeSettings.svelte';
   import SharingSettings from './SharingSettings.svelte';
   import UserApiKeyList from './UserApiKeyList.svelte';
   import UserPasskeyList from './UserPasskeyList.svelte';
   import UserProfileSettings from './UserProfileSettings.svelte';
-  import UserPurchaseSettings from './UserPurchaseSettings.svelte';
   import UserUsageStatistic from './UserUsageStatistic.svelte';
 
   const query = createPreloadedQuery(getUserConfigQuery);
   const config = $derived(query.data);
-  let oauthOpen =
-    oauth.isCallback(location) || page.url.searchParams.get(QueryParameter.OPEN_SETTING) === OpenQueryParam.OAUTH;
 </script>
 
 <SettingAccordion
@@ -105,18 +95,6 @@
   <NotificationsSettings />
 </SettingAccordion>
 
-{#if config.oauth.enabled}
-  <SettingAccordion
-    icon={mdiTwoFactorAuthentication}
-    key={OpenQueryParam.OAUTH}
-    title={$t('oauth')}
-    subtitle={$t('manage_your_oauth_connection')}
-    isOpen={oauthOpen || undefined}
-  >
-    <OAuthSettings />
-  </SettingAccordion>
-{/if}
-
 {#if config.passkey.enabled}
   <SettingAccordion
     icon={mdiShieldKeyOutline}
@@ -129,15 +107,6 @@
 {/if}
 
 <SettingAccordion
-  icon={mdiFormTextboxPassword}
-  key="password"
-  title={$t('password')}
-  subtitle={$t('change_your_password')}
->
-  <ChangePasswordSettings />
-</SettingAccordion>
-
-<SettingAccordion
   icon={mdiLockSmart}
   key="user-pin-code-settings"
   title={$t('user_pin_code_settings')}
@@ -145,16 +114,6 @@
   autoScrollTo={true}
 >
   <ChangePinCodeSettings />
-</SettingAccordion>
-
-<SettingAccordion
-  icon={mdiKeyOutline}
-  key={OpenQueryParam.PURCHASE_SETTINGS}
-  title={$t('user_purchase_settings')}
-  subtitle={$t('user_purchase_settings_description')}
-  autoScrollTo={true}
->
-  <UserPurchaseSettings />
 </SettingAccordion>
 
 <SettingAccordion

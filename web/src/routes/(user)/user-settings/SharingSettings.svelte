@@ -247,6 +247,7 @@
 
 <section class="my-4">
   <div class="flex flex-col sm:ms-4 md:ms-8">
+    <!--
     <SettingAccordion key="cluster-group" title={$t('people_cluster_group')} subtitle={$t('cluster_group_description')}>
       <Card class="mt-4">
         <CardBody>
@@ -333,6 +334,7 @@
         <Button shape="round" size="small" onclick={() => handleAddUsers()}>{$t('add_user')}</Button>
       </HStack>
     </SettingAccordion>
+    -->
 
     <SettingAccordion key="partners" title={$t('partners')} subtitle={$t('partners_description')}>
       {#if partners.length > 0}
