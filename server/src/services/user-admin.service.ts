@@ -61,7 +61,7 @@ export class UserAdminService extends BaseService {
       throw new BadRequestException('Admin status can only be changed by another admin');
     }
 
-    if (dto.quotaSizeInBytes && user.quotaSizeInBytes !== dto.quotaSizeInBytes) {
+    if (typeof dto.quotaSizeInBytes === 'number' && user.quotaSizeInBytes !== dto.quotaSizeInBytes) {
       await this.userRepository.syncUsage(id);
     }
 

@@ -28,7 +28,7 @@ abstract final class UserConverter {
     isPartnerSharedWith: false,
     profileChangedAt: adminDto.profileChangedAt,
     hasProfileImage: adminDto.profileImagePath.isNotEmpty,
-    quotaSizeInBytes: adminDto.quotaSizeInBytes ?? 0,
+    quotaSizeInBytes: adminDto.quotaSizeInBytes ?? -1,
     quotaUsageInBytes: adminDto.quotaUsageInBytes ?? 0,
   );
 

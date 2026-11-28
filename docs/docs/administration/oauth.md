@@ -73,7 +73,7 @@ Once you have a new OAuth client application configured, Immich can be configure
 | Storage Label Claim                                  | string  | preferred_username   | Claim mapping for the user's storage label**¹**                                     |
 | Role Claim                                           | string  | immich_role          | Claim mapping for the user's role. (should return "user" or "admin")**¹**           |
 | Storage Quota Claim                                  | string  | immich_quota         | Claim mapping for the user's storage**¹**                                           |
-| Default Storage Quota (GiB)                          | number  | 0                    | Default quota for user without storage quota claim (empty for unlimited quota)      |
+| Default Storage Quota (GB)                          | number  | empty                | Default quota for user without storage quota claim (empty for unlimited quota, 0 to block uploads)      |
 | Button Text                                          | string  | Login with OAuth     | Text for the OAuth button on the web                                                |
 | Auto Register                                        | boolean | true                 | When true, will automatically register a user the first time they sign in           |
 | [Auto Launch](#auto-launch)                          | boolean | false                | When true, will skip the login page and automatically start the OAuth login process |
@@ -85,7 +85,7 @@ Claims are applied when a user is first registered. On subsequent logins, claims
 
 The storage label is an exception: with the default claim (`preferred_username`), it is only set at registration and is not updated on later logins. To keep the storage label in sync with the IdP, configure a different Storage Label Claim (for example `uid`).
 
-The storage quota claim is a number in GiB: `-1` for unlimited, `0` to block uploads, any positive value for a fixed quota.
+The storage quota claim is a number in GB: `-1` for unlimited, `0` to block uploads, any positive value for a fixed quota.
 
 :::
 
@@ -195,7 +195,7 @@ Configuration of OAuth in Immich System Settings
 | End Session Endpoint               | https://auth.example.com/logout?rd=https://immich.example.com/      |
 | Storage Label Claim                | uid                                                                 |
 | Storage Quota Claim                | immich_quota                                                        |
-| Default Storage Quota (GiB)        | 0 (empty for unlimited quota)                                       |
+| Default Storage Quota (GB)        | empty for unlimited quota (0 to block uploads)                      |
 | Button Text                        | Sign in with Authelia (optional)                                    |
 | Auto Register                      | Enabled (optional)                                                  |
 | Auto Launch                        | Enabled (optional)                                                  |
@@ -226,7 +226,7 @@ Configuration of OAuth in Immich System Settings
 | Signing Algorithm            | RS256                                                               |
 | Storage Label Claim          | preferred_username                                                  |
 | Storage Quota Claim          | immich_quota                                                        |
-| Default Storage Quota (GiB)  | 0 (empty for unlimited quota)                                       |
+| Default Storage Quota (GB)  | empty for unlimited quota (0 to block uploads)                      |
 | Button Text                  | Sign in with Authentik (optional)                                   |
 | Auto Register                | Enabled (optional)                                                  |
 | Auto Launch                  | Enabled (optional)                                                  |
@@ -257,7 +257,7 @@ Configuration of OAuth in Immich System Settings
 | Signing Algorithm            | RS256                                                                        |
 | Storage Label Claim          | preferred_username                                                           |
 | Storage Quota Claim          | immich_quota                                                                 |
-| Default Storage Quota (GiB)  | 0 (empty for unlimited quota)                                                |
+| Default Storage Quota (GB)  | 0 (empty for unlimited quota)                                                |
 | Button Text                  | Sign in with Google (optional)                                               |
 | Auto Register                | Enabled (optional)                                                           |
 | Auto Launch                  | Enabled                                                                      |
@@ -291,7 +291,7 @@ Configuration of OAuth in Immich System Settings
 | Storage Label Claim          | preferred_username                                    |
 | Role Claim                   | immich_role                                           |
 | Storage Quota Claim          | immich_quota                                          |
-| Default Storage Quota (GiB)  | 0 (empty for unlimited quota)                         |
+| Default Storage Quota (GB)  | 0 (empty for unlimited quota)                         |
 | Button Text                  | Sign in with Keycloak (recommended)                   |
 | Auto Register                | Enabled (optional)                                    |
 | Auto Launch                  | Enabled (optional)                                    |

@@ -100,7 +100,7 @@ class SyncStreamRepository extends DatabaseAccessor<Drift> with $SyncStreamRepos
             avatarColor: Value(user.avatarColor.orElse(null)?.toAvatarColor() ?? AvatarColor.primary),
             isAdmin: Value(user.isAdmin),
             pinCode: Value(user.pinCode),
-            quotaSizeInBytes: Value(user.quotaSizeInBytes ?? 0),
+            quotaSizeInBytes: Value(user.quotaSizeInBytes ?? -1),
             quotaUsageInBytes: Value(user.quotaUsageInBytes),
           );
 
@@ -129,7 +129,7 @@ class SyncStreamRepository extends DatabaseAccessor<Drift> with $SyncStreamRepos
             avatarColor: Value(user.avatarColor.orElse(null)?.toAvatarColor() ?? AvatarColor.primary),
             isAdmin: Value(user.isAdmin),
             pinCode: Value(user.pinCode),
-            quotaSizeInBytes: Value(user.quotaSizeInBytes ?? 0),
+            quotaSizeInBytes: Value(user.quotaSizeInBytes ?? -1),
             quotaUsageInBytes: Value(user.quotaUsageInBytes),
           );
 

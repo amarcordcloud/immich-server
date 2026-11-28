@@ -645,7 +645,7 @@ export class AuthService extends BaseService {
       return user;
     }
 
-    if (updates.quotaSizeInBytes) {
+    if (typeof updates.quotaSizeInBytes === 'number') {
       await this.userRepository.syncUsage(user.id);
     }
 

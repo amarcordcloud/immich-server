@@ -166,7 +166,7 @@ class ImmichAppBarDialog extends HookConsumerWidget {
       if (user != null && user.hasQuota) {
         usedDiskSpace = formatBytes(user.quotaUsageInBytes);
         totalDiskSpace = formatBytes(user.quotaSizeInBytes);
-        percentage = user.quotaUsageInBytes / user.quotaSizeInBytes;
+        percentage = user.quotaSizeInBytes == 0 ? 1.0 : user.quotaUsageInBytes / user.quotaSizeInBytes;
       }
 
       return Container(

@@ -45,7 +45,7 @@
           available: getByteUnitString(availableBytes, $locale),
         },
       })}
-      value={usedBytes / availableBytes}
+      value={availableBytes === 0 ? 1 : usedBytes / availableBytes}
       {thresholds}
     />
   {:else}

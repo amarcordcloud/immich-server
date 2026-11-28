@@ -53,10 +53,10 @@ abstract class UserDto with _$UserDto {
     @Default(false) bool isPartnerSharedWith,
     @Default(false) bool hasProfileImage,
     @Default(0) int quotaUsageInBytes,
-    @Default(0) int quotaSizeInBytes,
+    @Default(-1) int quotaSizeInBytes,
   }) = _UserDto;
 
-  bool get hasQuota => quotaSizeInBytes > 0;
+  bool get hasQuota => quotaSizeInBytes >= 0;
 
   // We use [DateTime.isAtSameMomentAs] for comparing across timezones. As Freezed doesn't support custom equality, we need to have our own `==` for now
   // TODO(agg23): Switch to newtypes to fix equality
