@@ -26,10 +26,10 @@
   const previousQuota = $derived(user.quotaSizeInBytes);
 
   let quotaSize = $derived(
-    typeof user.quotaSizeInBytes === 'number' ? convertFromBytes(user.quotaSizeInBytes, ByteUnit.GiB) : undefined,
+    typeof user.quotaSizeInBytes === 'number' ? convertFromBytes(user.quotaSizeInBytes, ByteUnit.GB) : undefined,
   );
 
-  const quotaSizeBytes = $derived(typeof quotaSize === 'number' ? convertToBytes(quotaSize, ByteUnit.GiB) : null);
+  const quotaSizeBytes = $derived(typeof quotaSize === 'number' ? convertToBytes(quotaSize, ByteUnit.GB) : null);
 
   let quotaSizeWarning = $derived(
     previousQuota !== quotaSizeBytes && !!quotaSizeBytes && serverInfo && quotaSizeBytes > serverInfo.diskSizeRaw,

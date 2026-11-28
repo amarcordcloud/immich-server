@@ -47,7 +47,7 @@ const quotaSizeInBytesSchema = z.coerce
       return;
     }
 
-    return quota === null || quota === -1 ? null : quota * HumanReadableSize.GiB;
+    return quota === null || quota === -1 ? null : quota * HumanReadableSize.GB;
   })
   .catch(undefined);
 

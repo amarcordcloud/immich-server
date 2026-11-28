@@ -31,7 +31,7 @@
   let quotaSize: string | undefined = $state();
   let isCreatingUser = $state(false);
 
-  let quotaSizeInBytes = $derived(quotaSize === null ? null : convertToBytes(Number(quotaSize), ByteUnit.GiB));
+  let quotaSizeInBytes = $derived(quotaSize === null ? null : convertToBytes(Number(quotaSize), ByteUnit.GB));
   let quotaSizeWarning = $derived(quotaSizeInBytes && serverInfo && quotaSizeInBytes > serverInfo.diskSizeRaw);
 
   const passwordMismatch = $derived(password !== passwordConfirm && passwordConfirm.length > 0);

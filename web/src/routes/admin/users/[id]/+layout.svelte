@@ -70,8 +70,8 @@
   const heatmap = $derived(queries.heatmap.data);
   const usedBytes = $derived(user.quotaUsageInBytes ?? 0);
   const availableBytes = $derived(user.quotaSizeInBytes ?? 0);
-  const TiB = 1024 ** 4;
-  const [statsUsage, statsUsageUnit] = $derived(getBytesWithUnit(usedBytes, usedBytes > TiB ? 2 : 0));
+  const TB = 1000 ** 4;
+  const [statsUsage, statsUsageUnit] = $derived(getBytesWithUnit(usedBytes, usedBytes > TB ? 2 : 0));
 
   let editedLocale = $derived(findLocale($locale).code);
   let createAtDate = $derived(new Date(user.createdAt));

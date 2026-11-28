@@ -163,7 +163,7 @@ class AdvancedSettings extends HookConsumerWidget {
           }
 
           // iOS always returns a small non-zero value
-          final clearedMB = clearedBytes < (256 * 1024) ? "0 MiB" : formatHumanReadableBytes(clearedBytes, 2);
+          final clearedMB = clearedBytes < (256 * 1000) ? "0 MB" : formatHumanReadableBytes(clearedBytes, 2);
           context.scaffoldMessenger.showSnackBar(
             SnackBar(
               duration: const Duration(seconds: 2),

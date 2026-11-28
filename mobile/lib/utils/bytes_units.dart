@@ -1,14 +1,14 @@
 import 'dart:math';
 
 String formatBytes(int bytes) {
-  const units = ['B', 'KiB', 'MiB', 'GiB', 'TiB', 'PiB', 'EiB'];
+  const units = ['B', 'kB', 'MB', 'GB', 'TB', 'PB', 'EB'];
 
   int magnitude = 0;
   double remainder = bytes.toDouble();
-  while (remainder >= 1024) {
+  while (remainder >= 1000) {
     if (magnitude + 1 < units.length) {
       magnitude++;
-      remainder /= 1024;
+      remainder /= 1000;
     } else {
       break;
     }
@@ -21,7 +21,7 @@ String formatHumanReadableBytes(int bytes, int decimals) {
   if (bytes <= 0) {
     return "0 B";
   }
-  const suffixes = ["B", "KiB", "MiB", "GiB", "TiB"];
-  final i = (log(bytes) / log(1024)).floor();
-  return '${(bytes / pow(1024, i)).toStringAsFixed(decimals)} ${suffixes[i]}';
+  const suffixes = ["B", "kB", "MB", "GB", "TB"];
+  final i = (log(bytes) / log(1000)).floor();
+  return '${(bytes / pow(1000, i)).toStringAsFixed(decimals)} ${suffixes[i]}';
 }

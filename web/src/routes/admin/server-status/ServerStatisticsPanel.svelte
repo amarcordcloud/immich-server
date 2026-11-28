@@ -30,8 +30,8 @@
   const stats = $derived(queries.statistics.data);
 
   const getStorageUsageWithUnit = (usage: number) => {
-    const TiB = 1024 ** 4;
-    return getBytesWithUnit(usage, usage > TiB ? 2 : 0);
+    const TB = 1000 ** 4;
+    return getBytesWithUnit(usage, usage > TB ? 2 : 0);
   };
 
   const [storage, storageUnit] = $derived(stats ? getStorageUsageWithUnit(stats.usage) : [undefined, undefined]);
